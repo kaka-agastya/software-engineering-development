@@ -3,7 +3,10 @@ import { EmergencyCountdown } from "@/components/FeatureVisuals";
 import { APP_DOWNLOAD_URL } from "@/lib/site";
 
 const figures = [
-  { value: "±495.000", label: "penduduk Indonesia hidup dengan gangguan mental berat" },
+  {
+    value: "±495.000",
+    label: "penduduk Indonesia hidup dengan gangguan mental berat",
+  },
   { value: "826", label: "kasus bunuh diri yang tercatat selama 2022" },
   { value: "1 : 300.000", label: "rasio psikolog terhadap jumlah penduduk" },
   { value: "89%", label: "penduduk kini punya smartphone" },
@@ -35,7 +38,6 @@ const highlights = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero: malam, tempat percakapan dimulai */}
       <section className="relative overflow-hidden bg-night">
         <span
           aria-hidden
@@ -47,9 +49,10 @@ export default function HomePage() {
               Kamu masih di sini hari ini, dan itu sudah hebat.
             </h1>
             <p className="mt-7 max-w-xl text-lead text-paper/85">
-              LIVIA adalah teman bercerita berbasis AI di ponsel Android. Ceritamu didengar tanpa
-              dihakimi, tanda saat kamu sedang berat dikenali, dan orang terdekatmu dikabari ketika
-              kamu perlu ditolong.
+              LIVIA adalah teman bercerita berbasis AI di ponsel Android.
+              Ceritamu didengar tanpa dihakimi, tanda saat kamu sedang berat
+              dikenali, dan orang terdekatmu dikabari ketika kamu perlu
+              ditolong.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <a
@@ -66,13 +69,15 @@ export default function HomePage() {
               </Link>
             </div>
             <p className="mt-5 max-w-xl text-small text-paper/80">
-              Gratis dipakai. LIVIA (Living Voice for Inner Awareness) tidak menggantikan psikolog
-              atau psikiater.
+              Gratis dipakai. LIVIA (Living Voice for Inner Awareness) tidak
+              menggantikan psikolog atau psikiater.
             </p>
           </div>
 
-          {/* Baris percakapan mengikuti storyboard Frame 4 */}
-          <figure aria-label="Contoh percakapan di aplikasi LIVIA" className="flex flex-col gap-3">
+          <figure
+            aria-label="Contoh percakapan di aplikasi LIVIA"
+            className="flex flex-col gap-3"
+          >
             <figcaption className="self-end rounded-full bg-night px-3 py-1 text-small tabular-nums text-paper">
               02.14
             </figcaption>
@@ -83,8 +88,8 @@ export default function HomePage() {
               className="bubble max-w-[92%] rounded-3xl rounded-bl-md bg-paper px-5 py-4 text-ink"
               style={{ animationDelay: "0.9s" }}
             >
-              Aku dengar kamu sedang merasa sangat capek dan sendirian. Terima kasih sudah mau cerita
-              ke aku.
+              Aku dengar kamu sedang merasa sangat capek dan sendirian. Terima
+              kasih sudah mau cerita ke aku.
             </p>
             <p
               className="bubble max-w-[70%] rounded-3xl rounded-bl-md bg-paper px-5 py-4 text-ink"
@@ -96,7 +101,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Alasan */}
       <section className="bg-main-700">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <div className="grid gap-6 md:grid-cols-2 md:gap-12">
@@ -104,9 +108,11 @@ export default function HomePage() {
               Terlalu banyak orang memikulnya seorang diri.
             </h2>
             <p className="max-w-lg text-paper/85">
-              Jumlah tenaga profesional masih jauh dari cukup, dan stigma membuat banyak orang enggan
-              meminta tolong. Padahal ponsel selalu ada di genggaman. Di situlah LIVIA menjadi
-              pendamping pertama, agar malam yang paling berat tidak perlu dilalui tanpa siapa-siapa.
+              Jumlah tenaga profesional masih jauh dari cukup, dan stigma
+              membuat banyak orang enggan meminta tolong. Padahal ponsel selalu
+              ada di genggaman. Di situlah LIVIA menjadi pendamping pertama,
+              agar malam yang paling berat tidak perlu dilalui tanpa
+              siapa-siapa.
             </p>
           </div>
           <dl className="mt-14 grid gap-x-12 gap-y-10 sm:grid-cols-2">
@@ -119,17 +125,17 @@ export default function HomePage() {
               </div>
             ))}
           </dl>
-          {/* TODO: ganti dengan rujukan resmi (Kemenkes, Polri, HIMPSI, APJII) */}
           <p className="mt-10 text-caption text-paper/75">
             Sumber: dihimpun dari dokumen kebutuhan LIVIA, 2026.
           </p>
         </div>
       </section>
 
-      {/* Fitur ringkas */}
       <section className="bg-main-500">
         <div className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <h2 className="text-heading text-paper md:text-title">Yang bisa LIVIA lakukan untukmu</h2>
+          <h2 className="text-heading text-paper md:text-title">
+            Yang bisa LIVIA lakukan untukmu
+          </h2>
           <ul className="mt-10 divide-y divide-paper/30 border-y border-paper/30">
             {highlights.map((h) => (
               <li key={h.title}>
@@ -143,13 +149,15 @@ export default function HomePage() {
               </li>
             ))}
           </ul>
-          <Link href="/fitur" className="mt-7 inline-block font-semibold text-paper underline underline-offset-4">
+          <Link
+            href="/fitur"
+            className="mt-7 inline-block font-semibold text-paper underline underline-offset-4"
+          >
             Lihat seluruh fitur
           </Link>
         </div>
       </section>
 
-      {/* Darurat */}
       <section className="bg-main-100">
         <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2 md:py-24">
           <div>
@@ -157,9 +165,10 @@ export default function HomePage() {
               Saat genting pun, keputusan tetap di tanganmu.
             </h2>
             <p className="mt-5 text-night">
-              Begitu LIVIA membaca risiko tinggi atau kamu menekan tombol darurat, ada 10 detik untuk
-              membatalkan. Kalau tidak dibatalkan, lokasimu terkirim lewat SMS ke kontak darurat, lalu
-              LIVIA memastikan paling tidak satu orang menanggapi.
+              Begitu LIVIA membaca risiko tinggi atau kamu menekan tombol
+              darurat, ada 10 detik untuk membatalkan. Kalau tidak dibatalkan,
+              lokasimu terkirim lewat SMS ke kontak darurat, lalu LIVIA
+              memastikan paling tidak satu orang menanggapi.
             </p>
             <Link
               href="/cara-kerja#alur-darurat"
@@ -174,7 +183,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Disclaimer + CTA: pagi, lingkaran yang sama kini terbit */}
       <section id="unduh" className="relative overflow-hidden bg-paper">
         <span
           aria-hidden
@@ -185,8 +193,9 @@ export default function HomePage() {
             Kamu tidak perlu menanggungnya sendiri.
           </h2>
           <p className="mt-6 max-w-xl text-lead">
-            LIVIA hanya memberi dukungan emosional awal, bukan diagnosis klinis. Untuk penanganan
-            jangka panjang, psikolog atau psikiater tetap tempat yang tepat.
+            LIVIA hanya memberi dukungan emosional awal, bukan diagnosis klinis.
+            Untuk penanganan jangka panjang, psikolog atau psikiater tetap
+            tempat yang tepat.
           </p>
           <a
             href={APP_DOWNLOAD_URL}
