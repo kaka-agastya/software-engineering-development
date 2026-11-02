@@ -1,26 +1,153 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Design system LIVIA
+ * Warna inti (main, alert, caution 100/500/700) diambil persis dari design system.
+ * Tint 50 diturunkan untuk latar lembut, karena 100 terlalu pekat untuk area luas.
+ */
+@theme {
+  /* Main */
+  --color-main-50: #eaf1f3;
+  --color-main-100: #8ab0bc;
+  --color-main-500: #3b6978;
+  --color-main-700: #105065;
+
+  /* Alert */
+  --color-alert-50: #f8ecec;
+  --color-alert-100: #d69f9f;
+  --color-alert-500: #b66262;
+  --color-alert-700: #902121;
+
+  /* Caution */
+  --color-caution-50: #fff8dc;
+  --color-caution-100: #ffe486;
+  --color-caution-500: #ffd959;
+  --color-caution-700: #fed036;
+
+  /* Netral */
+  --color-paper: #fffbf7;
+  --color-paper-deep: #f6efe7;
+  --color-line: #e8e0d7;
+
+  /* Alias semantik yang dipakai komponen */
+  --color-ink: #105065; /* main/700: judul, tombol utama */
+  --color-ink-soft: #3d535b; /* teks isi */
+  --color-muted: #66767d; /* teks pendukung */
+  --color-alert: #902121; /* alert/700: aman untuk teks & tombol */
+  --color-alert-ink: #902121;
+  --color-alert-soft: #f8ecec;
+  --color-calm: #eaf1f3;
+  --color-calm-ink: #105065;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Tipografi dari design system */
+  --text-heading: 1.5rem; /* 24 / 32 */
+  --text-heading--line-height: 2rem;
+  --text-heading--font-weight: 700;
+
+  --text-card-title: 1.125rem; /* 18 / 26 */
+  --text-card-title--line-height: 1.625rem;
+  --text-card-title--font-weight: 600;
+
+  --text-page-title: 1.125rem; /* 18 / 26 */
+  --text-page-title--line-height: 1.625rem;
+  --text-page-title--font-weight: 600;
+
+  --text-body: 1rem; /* 16 / 24 */
+  --text-body--line-height: 1.5rem;
+  --text-body--font-weight: 400;
+
+  --text-form-label: 0.875rem; /* 14 / 20 */
+  --text-form-label--line-height: 1.25rem;
+  --text-form-label--font-weight: 500;
+
+  --text-button: 1rem; /* 16 / 24 */
+  --text-button--line-height: 1.5rem;
+  --text-button--font-weight: 600;
+
+  --text-caption: 0.75rem; /* 12 / 18 */
+  --text-caption--line-height: 1.125rem;
+  --text-caption--font-weight: 400;
+
+  --text-badge: 0.75rem; /* 12 / 16 */
+  --text-badge--line-height: 1rem;
+  --text-badge--font-weight: 500;
+
+  /*
+   * Tambahan untuk kebutuhan website (tidak ada di design system aplikasi).
+   * Skala melanjutkan rasio heading agar tetap proporsional di layar lebar.
+   */
+  --text-small: 0.875rem; /* 14 / 20, isi sekunder */
+  --text-small--line-height: 1.25rem;
+  --text-small--font-weight: 400;
+
+  --text-lead: 1.125rem; /* 18 / 28, paragraf pembuka */
+  --text-lead--line-height: 1.75rem;
+  --text-lead--font-weight: 400;
+
+  --text-title: 2rem; /* 32 / 40, judul section di desktop */
+  --text-title--line-height: 2.5rem;
+  --text-title--font-weight: 700;
+  --text-title--letter-spacing: -0.01em;
+
+  --text-display: 2.5rem; /* 40 / 48, judul halaman di mobile */
+  --text-display--line-height: 3rem;
+  --text-display--font-weight: 700;
+  --text-display--letter-spacing: -0.02em;
+
+  --text-display-lg: 3.5rem; /* 56 / 64, judul halaman di desktop */
+  --text-display-lg--line-height: 4rem;
+  --text-display-lg--font-weight: 700;
+  --text-display-lg--letter-spacing: -0.025em;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-paper);
+  color: var(--color-ink-soft);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    color: var(--color-ink);
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-main-500);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.bubble {
+  animation: bubble-in 0.5s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .bubble {
+    animation: none;
+  }
 }
