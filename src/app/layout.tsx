@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { CrisisStrip } from "@/components/CrisisStrip";
-import { SiteHeader } from "@/components/SiteHeader";
-import { SiteFooter } from "@/components/SiteFooter";
+import { CrisisStrip } from "./_components/CrisisStrip";
+import { SiteHeader } from "./_components/SiteHeader";
+import { SiteFooter } from "./_components/SiteFooter";
 import "./globals.css";
 
 // Inter sesuai design system LIVIA
@@ -14,11 +14,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "LIVIA - Teman cerita yang selalu ada",
+    default: "LIVIA – Tempat bercerita kapan pun kamu perlu",
     template: "%s | LIVIA",
   },
   description:
-    "LIVIA (Living Voice for Inner Awareness) adalah aplikasi Android berbasis AI yang mendampingi kamu secara emosional dan menghubungi orang terdekatmu saat kamu butuh bantuan.",
+    "LIVIA (Living Voice for Inner Awareness) adalah aplikasi Android berbasis AI untuk teman bercerita, yang juga mengabari orang terdekatmu ketika kamu perlu ditolong.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,9 +27,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans">
         <a
           href="#konten"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-paper"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-paper focus:px-4 focus:py-2 focus:text-ink"
         >
-          Langsung ke konten
+          Lewati ke isi halaman
         </a>
         <CrisisStrip />
         <SiteHeader />

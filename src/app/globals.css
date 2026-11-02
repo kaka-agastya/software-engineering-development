@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Design system LIVIA
- * Warna inti (main, alert, caution 100/500/700) diambil persis dari design system.
- * Tint 50 diturunkan untuk latar lembut, karena 100 terlalu pekat untuk area luas.
+ * Design system LIVIA, versi "malam menuju pagi".
+ * Warna inti (main, alert, caution 100/500/700) tetap persis dari design system.
+ * Yang berubah: netral jadi sejuk dan ada tambahan warna night.
  */
 @theme {
   /* Main */
@@ -25,14 +25,15 @@
   --color-caution-700: #fed036;
 
   /* Netral */
-  --color-paper: #fffbf7;
-  --color-paper-deep: #f6efe7;
-  --color-line: #e8e0d7;
+  --color-night: #0c3c4c; /* main/700 digelapkan: langit paling awal */
+  --color-paper: #f7fafa;
+  --color-paper-deep: #e6eff1;
+  --color-line: #cfdde1;
 
   /* Alias semantik yang dipakai komponen */
   --color-ink: #105065; /* main/700: judul, tombol utama */
   --color-ink-soft: #3d535b; /* teks isi */
-  --color-muted: #66767d; /* teks pendukung */
+  --color-muted: #586a71; /* teks pendukung */
   --color-alert: #902121; /* alert/700: aman untuk teks & tombol */
   --color-alert-ink: #902121;
   --color-alert-soft: #f8ecec;
@@ -116,16 +117,23 @@ body {
 
 @layer base {
   h1,
+  h2 {
+    text-wrap: balance;
+  }
+
+  h1,
   h2,
   h3 {
     color: var(--color-ink);
   }
 }
 
+/* Dua lapis warna supaya fokus tetap terlihat di latar gelap maupun terang */
 :focus-visible {
-  outline: 3px solid var(--color-main-500);
-  outline-offset: 3px;
-  border-radius: 6px;
+  outline: 3px solid var(--color-night);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-caution-500);
+  border-radius: 4px;
 }
 
 @keyframes bubble-in {
