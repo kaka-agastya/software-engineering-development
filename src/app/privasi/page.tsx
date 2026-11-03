@@ -42,7 +42,7 @@ const dataRows = [
 ];
 
 const deleteSteps = [
-  "Buka Halaman Profil di aplikasi.",
+  "Buka Halaman Profil.",
   "Pilih Hapus Akun.",
   "Baca peringatannya, lalu pilih Ya, hapus akun.",
 ];
