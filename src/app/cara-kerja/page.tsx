@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 const onboarding = [
   {
-    title: "Unduh dan buka LIVIA",
-    body: "Pasang aplikasi di ponsel Android, lalu pilih Daftar di halaman selamat datang.",
+    title: "Registrasi",
+    body: "Masuk ke menu login, lalu pilih Daftar di halaman selamat datang.",
   },
   {
     title: "Isi data diri",
