@@ -1,69 +1,183 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import { PageIntro } from "@/components/PageIntro";
+import { TEAM_EMAIL, crisisContacts } from "@/lib/site";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Privasi & bantuan",
+  description:
+    "Data apa yang disimpan LIVIA, bagaimana dilindungi, hakmu atas data, dan layanan bantuan krisis.",
+};
+
+const dataRows = [
+  {
+    what: "Profil akun",
+    detail: "Nama, nama panggilan, nomor ponsel, kata sandi",
+    why: "Masuk ke akun dan verifikasi nomor",
+  },
+  {
+    what: "Kontak darurat",
+    detail: "Nama, nomor ponsel, hubungan",
+    why: "Menghubungi orang terdekatmu saat darurat",
+  },
+  {
+    what: "Percakapan",
+    detail: "Pesanmu dan balasan LIVIA",
+    why: "Melanjutkan percakapan dan fitur pencarian",
+  },
+  {
+    what: "Catatan emosi",
+    detail: "Suasana hati, skor risiko, waktu",
+    why: "Grafik tren dan deteksi tanda krisis",
+  },
+  {
+    what: "Check-in",
+    detail: "Jadwal, jawaban, waktu respons",
+    why: "Menyapa sesuai jadwal pilihanmu",
+  },
+  {
+    what: "Log insiden",
+    detail: "Tahapan prosedur darurat dan lokasi",
+    why: "Memastikan bantuan berjalan dan bisa ditelusuri",
+  },
+];
+
+const deleteSteps = [
+  "Buka Halaman Profil di aplikasi.",
+  "Pilih Hapus Akun.",
+  "Baca peringatannya, lalu pilih Ya, hapus akun.",
+];
+
+export default function PrivasiPage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <PageIntro
+        title="Ceritamu milikmu."
+        lead="Kami tahu yang kamu bagikan di LIVIA sangat pribadi. Berikut penjelasan jujur tentang data yang disimpan, bagaimana kami melindunginya, dan kendali yang kamu punya."
+      />
+
+      <section className="mx-auto max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">Data yang disimpan</h2>
+        <p className="mt-3 max-w-2xl text-ink-soft">
+          Seluruh data di bawah ini disimpan dalam bentuk terenkripsi.
+        </p>
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
+          <table className="w-full min-w-[640px] text-left">
+            <thead className="bg-paper-deep text-small text-ink-soft">
+              <tr>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Data
+                </th>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Isinya
+                </th>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Untuk apa
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {dataRows.map((r) => (
+                <tr key={r.what}>
+                  <th scope="row" className="px-5 py-4 font-semibold">
+                    {r.what}
+                  </th>
+                  <td className="px-5 py-4 text-ink-soft">{r.detail}</td>
+                  <td className="px-5 py-4 text-ink-soft">{r.why}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-20 grid max-w-6xl gap-6 px-5 md:grid-cols-2">
+        <div className="rounded-3xl bg-paper-deep p-8">
+          <h2 className="text-heading">Kapan datamu dibagikan</h2>
+          <p className="mt-4 text-ink-soft">
+            Hanya dalam satu keadaan: saat prosedur darurat berjalan. Kontak
+            daruratmu menerima pemberitahuan dan tautan lokasimu. Isi percakapan
+            dan catatan emosimu tidak pernah dikirimkan kepada mereka.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="rounded-3xl border border-caution-700 bg-caution-50 p-8">
+          <h2 className="text-heading">Batasan LIVIA</h2>
+          <p className="mt-4 text-ink-soft">
+            LIVIA adalah pendamping berbasis AI. Ia tidak memberikan diagnosis
+            klinis dan tidak menggantikan psikolog, psikiater, maupun layanan
+            medis. AI juga bisa keliru membaca situasi, jadi tombol darurat
+            selalu tersedia untuk kamu tekan sendiri.
+          </p>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="mx-auto mt-20 max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">
+          Menghapus akun dan seluruh data
+        </h2>
+        <p className="mt-3 max-w-2xl text-ink-soft">
+          Kamu bisa menghapus akun kapan saja. Profil, kontak darurat,
+          percakapan, catatan emosi, jadwal check-in, dan riwayat darurat akan
+          dihapus permanen dan tidak bisa dipulihkan.
+        </p>
+        <ol className="mt-8 grid gap-4 md:grid-cols-3">
+          {deleteSteps.map((s, i) => (
+            <li
+              key={s}
+              className="flex gap-4 rounded-2xl border border-line p-5"
+            >
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink text-form-label font-bold text-paper">
+                {i + 1}
+              </span>
+              <span className="">{s}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="bantuan" className="mt-24 scroll-mt-24 bg-ink text-paper">
+        <div className="mx-auto max-w-6xl px-5 py-20">
+          <h2 className="text-heading text-paper md:text-title">
+            Bantuan di luar LIVIA
+          </h2>
+          <p className="mt-4 max-w-2xl text-paper/80">
+            Jika kamu atau orang di sekitarmu sedang dalam bahaya, jangan
+            menunggu. Hubungi layanan berikut.
+          </p>
+          <ul className="mt-10 grid gap-6 md:grid-cols-2">
+            {crisisContacts.map((c) => (
+              <li key={c.number} className="rounded-3xl bg-paper/10 p-7">
+                <p className="text-paper/75">{c.name}</p>
+                <a
+                  href={`tel:${c.tel}`}
+                  className="mt-2 block text-display underline-offset-4 hover:underline"
+                >
+                  {c.number}
+                </a>
+                <p className="mt-3 text-small text-paper/75">{c.note}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-6 text-small text-paper/60">
+            Kamu juga bisa datang ke puskesmas, rumah sakit, atau unit gawat
+            darurat terdekat.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto mt-20 max-w-3xl px-5">
+        <h2 className="text-heading">Pertanyaan tentang privasi</h2>
+        <p className="mt-4 text-ink-soft">
+          Hubungi tim pengembang LIVIA di{" "}
+          <a
+            href={`mailto:${TEAM_EMAIL}`}
+            className="font-semibold text-ink underline underline-offset-4"
+          >
+            {TEAM_EMAIL}
+          </a>
+          . Email ini bukan layanan darurat dan mungkin tidak dibalas
+          secepatnya.
+        </p>
+      </section>
+    </>
   );
 }

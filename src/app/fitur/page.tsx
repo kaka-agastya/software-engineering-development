@@ -14,7 +14,8 @@ import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Fitur",
-  description: "Percakapan empatik, analisis emosi, check-in berkala, dan bantuan darurat di LIVIA.",
+  description:
+    "Percakapan empatik, analisis emosi, check-in berkala, dan bantuan darurat di LIVIA.",
 };
 
 type Feature = {
@@ -178,7 +179,10 @@ export default function FiturPage() {
       <section className="mx-auto mt-20 max-w-6xl px-5">
         <p className="text-lead text-ink-soft">
           Ingin tahu langkah-langkah memakainya?{" "}
-          <Link href="/cara-kerja" className="font-semibold text-ink underline underline-offset-4">
+          <Link
+            href="/cara-kerja"
+            className="font-semibold text-ink underline underline-offset-4"
+          >
             Lihat cara kerja LIVIA
           </Link>
         </p>

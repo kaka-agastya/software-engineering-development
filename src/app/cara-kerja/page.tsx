@@ -4,7 +4,8 @@ import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Cara kerja",
-  description: "Langkah memulai LIVIA dan apa yang terjadi saat prosedur darurat berjalan.",
+  description:
+    "Langkah memulai LIVIA dan apa yang terjadi saat prosedur darurat berjalan.",
 };
 
 const onboarding = [
@@ -76,7 +77,13 @@ const faq: FaqItem[] = [
   },
 ];
 
-function Steps({ items, tone = "ink" }: { items: { title: string; body: string }[]; tone?: "ink" | "alert" }) {
+function Steps({
+  items,
+  tone = "ink",
+}: {
+  items: { title: string; body: string }[];
+  tone?: "ink" | "alert";
+}) {
   return (
     <ol className="relative space-y-8 border-l-2 border-line pl-8">
       {items.map((s, i) => (
@@ -116,8 +123,8 @@ export default function CaraKerjaPage() {
               Apa yang terjadi saat darurat
             </h2>
             <p className="mt-5 max-w-sm text-ink-soft">
-              Prosedur yang sama berlaku baik saat kamu menekan tombol darurat sendiri maupun saat
-              LIVIA mendeteksinya secara otomatis.
+              Prosedur yang sama berlaku baik saat kamu menekan tombol darurat
+              sendiri maupun saat LIVIA mendeteksinya secara otomatis.
             </p>
           </div>
           <div className="pl-4">
@@ -127,7 +134,9 @@ export default function CaraKerjaPage() {
       </section>
 
       <section className="mx-auto mt-24 max-w-6xl px-5">
-        <h2 className="text-heading md:text-title">Pertanyaan yang sering muncul</h2>
+        <h2 className="text-heading md:text-title">
+          Pertanyaan yang sering muncul
+        </h2>
         <div className="mt-8">
           <Faq items={faq} />
         </div>
