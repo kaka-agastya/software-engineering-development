@@ -1,11 +1,11 @@
 -- =====================================================================
--- Skema database LIVIA: SEMUA tabel dari Class Diagram SRS (Gambar 2).
+-- Skema database LIVIA: SEMUA tabel dari Class Diagram CDR (Gambar 2).
 --
 -- Cara pakai: Supabase Dashboard > SQL Editor > New query > tempel seluruh file > Run.
 --
 -- AMAN dijalankan ulang: tidak ada "drop table".
 --   - "create table if not exists" melewati tabel yang sudah ada.
---   - Data contoh memakai "on conflict do nothing", jadi tidak dobel.
+--   - Kolom/index tambahan memakai "if not exists".
 -- Kalau kolom sebuah tabel diubah di file ini, tabel lama TIDAK ikut berubah.
 -- Ubah lewat Table Editor, atau tanya ke yang mengurus database.
 -- =====================================================================
@@ -29,9 +29,11 @@ create table if not exists user_account (
 -- ---------------------------------------------------------------------
 -- OTP: phoneNumber, otpCode, expiresAt
 -- pending_data menampung isian formulir registrasi sampai OTP terverifikasi.
+-- user_id kosong selama registrasi (akun belum ada), terisi untuk OTP akun yang sudah ada.
 -- ---------------------------------------------------------------------
 create table if not exists otp (
   id            uuid primary key default gen_random_uuid(),
+  user_id       uuid references user_account(id) on delete cascade,
   phone_number  text not null,
   otp_code      text not null,
   expires_at    timestamptz not null,
@@ -109,6 +111,15 @@ create table if not exists risk_pattern (
   start_period  timestamptz not null,
   end_period    timestamptz not null,
   created_at    timestamptz not null default now()
+);
+
+-- ---------------------------------------------------------------------
+-- RiskPattern <>-- EmotionLog (agregasi 1..*): log emosi yang membentuk pola risiko
+-- ---------------------------------------------------------------------
+create table if not exists risk_pattern_emotion_log (
+  risk_pattern_id  uuid not null references risk_pattern(id) on delete cascade,
+  emotion_log_id   uuid not null references emotion_log(id) on delete cascade,
+  primary key (risk_pattern_id, emotion_log_id)
 );
 
 -- ---------------------------------------------------------------------
@@ -211,15 +222,37 @@ alter table emergency_alert    enable row level security;
 alter table location           enable row level security;
 alter table incident_log       enable row level security;
 alter table notification       enable row level security;
+alter table risk_pattern_emotion_log enable row level security;
 
 -- ---------------------------------------------------------------------
--- Data contoh supaya tabel di aplikasi langsung terisi.
--- Tabel lain sengaja kosong; isi lewat Table Editor bila perlu.
+-- Tambahan untuk database yang sudah dibuat dengan versi file sebelumnya
+-- ("create table if not exists" tidak menambah kolom ke tabel lama).
 -- ---------------------------------------------------------------------
-insert into user_account (full_name, nickname, phone_number, password_hash, account_status, risk_threshold) values
-  ('John Wick',      'Max',   '+6281234567890', 'contoh-hash', 'active',  0.7),
-  ('Clara Wheeler',  'Clara', '+6289876543210', 'contoh-hash', 'active',  0.7),
-  ('Budi Santoso',   'Budi',  '+6281311112222', 'contoh-hash', 'pending', 0.7),
-  ('Siti Rahmawati', 'Siti',  '+6285733334444', 'contoh-hash', 'active',  0.5),
-  ('Andi Pratama',   'Andi',  '+6287855556666', 'contoh-hash', 'pending', 0.7)
-on conflict (phone_number) do nothing;
+alter table otp add column if not exists user_id uuid references user_account(id) on delete cascade;
+
+-- ---------------------------------------------------------------------
+-- Index untuk foreign key (Postgres tidak membuatnya otomatis).
+-- Dipakai saat filter per pengguna / per induk dan saat cascade delete.
+-- ---------------------------------------------------------------------
+create index if not exists otp_phone_number_idx            on otp (phone_number);
+create index if not exists otp_user_id_idx                 on otp (user_id);
+create index if not exists emergency_contact_user_id_idx   on emergency_contact (user_id);
+create index if not exists conversation_user_id_idx        on conversation (user_id);
+create index if not exists chat_message_conversation_idx   on chat_message (conversation_id, created_at);
+create index if not exists coping_suggestion_message_idx   on coping_suggestion (chat_message_id);
+create index if not exists emotion_log_user_time_idx       on emotion_log (user_id, timestamp);
+create index if not exists emotion_log_chat_message_idx    on emotion_log (chat_message_id);
+create index if not exists risk_pattern_user_id_idx        on risk_pattern (user_id);
+create index if not exists rpel_emotion_log_idx            on risk_pattern_emotion_log (emotion_log_id);
+create index if not exists check_in_schedule_user_id_idx   on check_in_schedule (user_id);
+create index if not exists check_in_user_id_idx            on check_in (user_id, scheduled_for);
+create index if not exists check_in_schedule_id_idx        on check_in (schedule_id);
+create index if not exists emergency_alert_user_id_idx     on emergency_alert (user_id);
+create index if not exists location_alert_idx              on location (emergency_alert_id);
+create index if not exists incident_log_alert_idx          on incident_log (emergency_alert_id, timestamp);
+create index if not exists notification_user_id_idx        on notification (user_id);
+create index if not exists notification_contact_idx        on notification (emergency_contact_id);
+create index if not exists notification_alert_idx          on notification (emergency_alert_id);
+create index if not exists notification_check_in_idx       on notification (check_in_id);
+
+-- Data contoh ada di seed.sql (jalankan setelah file ini).

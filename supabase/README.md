@@ -7,10 +7,15 @@ halaman tabel baru. Contoh yang sudah jadi: [`/data-pengguna`](http://localhost:
 
 1. Buat project di [supabase.com](https://supabase.com) → **New project**.
 2. Buka **SQL Editor** → **New query**, tempel seluruh isi [`schema.sql`](./schema.sql), lalu klik **Run**.
-   File ini membuat **semua 14 tabel** dari class diagram sekaligus, jadi anggota tim
-   lain tidak perlu menyentuh Supabase lagi. File ini aman dijalankan ulang karena
-   tabel yang sudah ada dilewati dan data tidak dihapus.
-3. Buka **Project Settings → API Keys**, lalu catat:
+   File ini membuat **semua tabel** dari class diagram sekaligus (14 class + tabel
+   penghubung `risk_pattern_emotion_log`), jadi anggota tim lain tidak perlu menyentuh
+   Supabase lagi. File ini aman dijalankan ulang karena tabel yang sudah ada dilewati
+   dan data tidak dihapus.
+3. Di query baru, tempel seluruh isi [`seed.sql`](./seed.sql), lalu klik **Run**.
+   Ini mengisi data contoh ke **semua** tabel (5 pengguna + percakapan, log emosi,
+   check-in, alarm darurat, dst). Semua akun contoh memakai kata sandi `password123`.
+   Aman dijalankan ulang, tidak membuat data dobel.
+4. Buka **Project Settings → API Keys**, lalu catat:
    - **Project URL**, contoh `https://abcdefgh.supabase.co`
    - **Secret key** (`sb_secret_...`). Di project lama namanya **service_role key**.
 
@@ -91,9 +96,9 @@ Contoh untuk tabel `emergency_contact`. Paling mudah: salin file `user-account`,
 | 5 | `src/app/data-kontak-darurat/page.tsx` | `data-pengguna/page.tsx` |
 | 6 | `src/app/data-kontak-darurat/contact-table.tsx` | `data-pengguna/user-table.tsx` |
 
-Tabel selain `user_account` masih kosong. Isi beberapa baris contoh lewat
-**Table Editor** → pilih tabel → **Insert row**. Untuk kolom `user_id`, salin `id`
-salah satu baris dari tabel `user_account`.
+Semua tabel sudah berisi data contoh dari `seed.sql`. Kalau butuh baris tambahan,
+tambahkan di `seed.sql` (pakai `id` tetap + `on conflict do nothing`) supaya anggota
+tim lain mendapat data yang sama.
 
 Yang perlu diganti di setiap salinan:
 - nama tabel di `.from("user_account")`
@@ -122,4 +127,5 @@ Yang perlu diganti di setiap salinan:
 | `column "..." does not exist` | Nama kolom di `.select()` atau di zod tidak sama dengan `schema.sql` |
 | `Invalid API key` | Yang dipakai publishable/anon key. Ganti dengan **secret key** |
 | `Cannot find name 'RouteContext'` di editor | Jalankan `bun dev` sekali. Tipe ini dibuat otomatis oleh Next.js |
-| Tabel kosong | Jalankan ulang bagian `insert into` di `schema.sql` |
+| Tabel kosong | Jalankan `seed.sql` di SQL Editor |
+| `function extensions.crypt does not exist` | Aktifkan extension **pgcrypto** di Database → Extensions, lalu jalankan ulang `seed.sql` |
