@@ -7,6 +7,9 @@ halaman tabel baru. Contoh yang sudah jadi: [`/data-pengguna`](http://localhost:
 
 1. Buat project di [supabase.com](https://supabase.com) → **New project**.
 2. Buka **SQL Editor** → **New query**, tempel seluruh isi [`schema.sql`](./schema.sql), lalu klik **Run**.
+   File ini membuat **semua 14 tabel** dari class diagram sekaligus, jadi anggota tim
+   lain tidak perlu menyentuh Supabase lagi. File ini aman dijalankan ulang karena
+   tabel yang sudah ada dilewati dan data tidak dihapus.
 3. Buka **Project Settings → API Keys**, lalu catat:
    - **Project URL**, contoh `https://abcdefgh.supabase.co`
    - **Secret key** (`sb_secret_...`). Di project lama namanya **service_role key**.
@@ -73,17 +76,24 @@ data-pengguna/page.tsx
 
 ## Menambah tabel baru
 
+**Semua tabel sudah ada di Supabase** (lihat `schema.sql`), jadi yang dikerjakan
+hanya kode di lokal. Nama kolom yang dipakai di kode harus sama persis dengan yang
+ada di `schema.sql`.
+
 Contoh untuk tabel `emergency_contact`. Paling mudah: salin file `user-account`, lalu ganti nama tabel dan kolomnya.
 
 | # | File yang dibuat | Disalin dari |
 | - | --- | --- |
-| 1 | Tambah `create table emergency_contact (...)` di `supabase/schema.sql`, lalu jalankan **query itu saja** di SQL Editor | (tulis baru) |
-| 2 | `src/lib/validations/emergency-contact.ts` | `validations/user-account.ts` |
-| 3 | `src/app/api/emergency-contact/route.ts` | `api/user-account/route.ts` |
-| 4 | `src/app/api/emergency-contact/[id]/route.ts` | `api/user-account/[id]/route.ts` |
-| 5 | `src/hooks/use-emergency-contacts.ts` | `hooks/use-user-accounts.ts` |
-| 6 | `src/app/data-kontak-darurat/page.tsx` | `data-pengguna/page.tsx` |
-| 7 | `src/app/data-kontak-darurat/contact-table.tsx` | `data-pengguna/user-table.tsx` |
+| 1 | `src/lib/validations/emergency-contact.ts` | `validations/user-account.ts` |
+| 2 | `src/app/api/emergency-contact/route.ts` | `api/user-account/route.ts` |
+| 3 | `src/app/api/emergency-contact/[id]/route.ts` | `api/user-account/[id]/route.ts` |
+| 4 | `src/hooks/use-emergency-contacts.ts` | `hooks/use-user-accounts.ts` |
+| 5 | `src/app/data-kontak-darurat/page.tsx` | `data-pengguna/page.tsx` |
+| 6 | `src/app/data-kontak-darurat/contact-table.tsx` | `data-pengguna/user-table.tsx` |
+
+Tabel selain `user_account` masih kosong. Isi beberapa baris contoh lewat
+**Table Editor** → pilih tabel → **Insert row**. Untuk kolom `user_id`, salin `id`
+salah satu baris dari tabel `user_account`.
 
 Yang perlu diganti di setiap salinan:
 - nama tabel di `.from("user_account")`
@@ -92,16 +102,6 @@ Yang perlu diganti di setiap salinan:
 - URL API di hook (`/api/user-account` → `/api/emergency-contact`)
 - `RouteContext<"/api/user-account/[id]">` → `RouteContext<"/api/emergency-contact/[id]">`
 - kolom tabel dan isian form di komponen tabel
-
-> **Penting:** jangan jalankan ulang seluruh `schema.sql` setelah ada data,
-> karena baris `drop table` akan menghapus tabel lama beserta isinya.
-> Jalankan hanya bagian `create table` yang baru.
-
-Jangan lupa aktifkan RLS untuk setiap tabel baru:
-
-```sql
-alter table emergency_contact enable row level security;
-```
 
 ## Kenapa lewat API di server, bukan langsung dari browser ke Supabase?
 
@@ -118,7 +118,8 @@ alter table emergency_contact enable row level security;
 | Pesan / gejala | Solusi |
 | --- | --- |
 | `SUPABASE_URL atau SUPABASE_SECRET_KEY belum diisi` | Isi `.env.local`, lalu restart `bun dev` |
-| `relation "..." does not exist` | Query `create table` belum dijalankan di SQL Editor |
+| `relation "..." does not exist` | `schema.sql` belum dijalankan di SQL Editor, atau nama tabel di `.from()` salah ketik |
+| `column "..." does not exist` | Nama kolom di `.select()` atau di zod tidak sama dengan `schema.sql` |
 | `Invalid API key` | Yang dipakai publishable/anon key. Ganti dengan **secret key** |
 | `Cannot find name 'RouteContext'` di editor | Jalankan `bun dev` sekali. Tipe ini dibuat otomatis oleh Next.js |
 | Tabel kosong | Jalankan ulang bagian `insert into` di `schema.sql` |
