@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@custom-variant dark (&:is(.dark *));
 
 /*
  * Design system LIVIA
@@ -120,6 +123,10 @@ body {
   h3 {
     color: var(--color-ink);
   }
+  /* Dari shadcn: warna garis default komponen */
+  * {
+    @apply border-border;
+  }
 }
 
 :focus-visible {
@@ -150,4 +157,59 @@ body {
   .bubble {
     animation: none;
   }
+}
+
+/*
+ * Token komponen shadcn/ui, diarahkan ke palet LIVIA.
+ * Catatan: --color-muted TIDAK dipetakan karena LIVIA sudah memakai
+ * `text-muted` untuk teks abu-abu. Di components/ui, `bg-muted`
+ * diganti `bg-secondary`.
+ */
+@theme inline {
+  --font-heading: var(--font-inter);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #fffbf7; /* paper */
+  --foreground: #3d535b; /* ink-soft */
+  --card: #ffffff;
+  --card-foreground: #3d535b;
+  --popover: #ffffff;
+  --popover-foreground: #3d535b;
+  --primary: #105065; /* main/700 */
+  --primary-foreground: #fffbf7;
+  --secondary: #f6efe7; /* paper-deep */
+  --secondary-foreground: #105065;
+  --muted-foreground: #66767d;
+  --accent: #eaf1f3; /* main/50 */
+  --accent-foreground: #105065;
+  --destructive: #902121; /* alert/700 */
+  --border: #e8e0d7; /* line */
+  --input: #e8e0d7;
+  --ring: #3b6978; /* main/500 */
+  --radius: 0.75rem;
 }
