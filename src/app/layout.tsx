@@ -21,7 +21,11 @@ export const metadata: Metadata = {
     "LIVIA (Living Voice for Inner Awareness) adalah aplikasi Android berbasis AI yang mendampingi kamu secara emosional dan menghubungi orang terdekatmu saat kamu butuh bantuan.",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="id" className={inter.variable}>
       <body className="font-sans">
