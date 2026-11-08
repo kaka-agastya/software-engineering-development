@@ -1,98 +1,103 @@
 import type { Metadata } from "next";
 import { Faq, type FaqItem } from "@/components/Faq";
-import { PageIntro } from "../_components/PageIntro";
+import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Cara kerja",
-  description: "Cara mulai memakai LIVIA dan urutan kejadian ketika prosedur darurat berjalan.",
+  description:
+    "Langkah memulai LIVIA dan apa yang terjadi saat prosedur darurat berjalan.",
 };
 
 const onboarding = [
   {
-    title: "Pasang dan buka aplikasinya",
-    body: "Unduh LIVIA ke ponsel Android, lalu ketuk Daftar pada halaman selamat datang.",
+    title: "Registrasi",
+    body: "Masuk ke menu login, lalu pilih Daftar di halaman selamat datang.",
   },
   {
-    title: "Lengkapi data diri",
-    body: "Isi nama lengkap, nama panggilan, kata sandi, dan nomor ponsel beserta kode negaranya (misalnya +62 812…).",
+    title: "Isi data diri",
+    body: "Masukkan nama lengkap, nama panggilan, nomor ponsel dengan kode negara (contoh: +62 812…), dan kata sandi.",
   },
   {
-    title: "Verifikasi nomormu",
-    body: "Ketik kode OTP dari SMS. Kalau kodenya salah atau sudah kedaluwarsa, kamu bisa meminta kode baru.",
+    title: "Verifikasi nomor ponsel",
+    body: "Masukkan kode OTP yang dikirim lewat SMS. Jika kode salah atau kedaluwarsa, minta kode baru.",
   },
   {
-    title: "Pilih kontak darurat",
-    body: "Daftarkan paling tidak satu orang kepercayaanmu. Akun baru aktif sepenuhnya setelah ini, sebab orang inilah yang dihubungi saat kamu perlu ditolong.",
+    title: "Tambahkan kontak darurat",
+    body: "Daftarkan minimal satu orang yang kamu percaya. Akunmu baru aktif penuh setelah langkah ini, karena kontak inilah yang akan dihubungi saat kamu butuh bantuan.",
   },
   {
-    title: "Mulai cerita",
-    body: "Layar percakapan langsung terbuka. Tuliskan yang kamu rasakan, panjang atau pendek sama-sama boleh.",
+    title: "Mulai bercerita",
+    body: "Kamu langsung masuk ke layar percakapan. Tulis apa yang sedang kamu rasakan, sepanjang atau sesingkat apa pun.",
   },
 ];
 
 const emergencyFlow = [
   {
-    title: "Prosedur dimulai",
-    body: "Pemicunya bisa tombol darurat yang kamu tekan, atau risiko tinggi yang terbaca LIVIA dari pesan dan jawaban check-in.",
+    title: "Pemicu",
+    body: "Kamu menekan tombol darurat, atau LIVIA mendeteksi risiko tinggi dari pesan maupun jawaban check-in.",
   },
   {
     title: "Hitung mundur 10 detik",
-    body: "Jendela konfirmasi terbuka. Pilih Batalkan bila kamu aman, atau Lanjutkan bila perlu bantuan. Tanpa pilihan apa pun, prosedur tetap berjalan otomatis.",
+    body: "Muncul jendela konfirmasi. Pilih Batalkan jika kamu aman, atau Lanjutkan jika butuh bantuan. Jika tidak memilih, prosedur berlanjut otomatis.",
   },
   {
-    title: "SMS dan lokasi dikirim",
-    body: "Seluruh kontak daruratmu mendapat SMS berisi tautan lokasi, dengan akurasi sampai 50 meter. Kamu juga diberi tahu bahwa pesannya sudah terkirim.",
+    title: "SMS dan lokasi terkirim",
+    body: "Semua kontak daruratmu menerima SMS berisi tautan lokasi dengan akurasi hingga 50 meter. Kamu mendapat pemberitahuan bahwa pesan sudah terkirim.",
   },
   {
-    title: "Satu menit menunggu tanggapan",
-    body: "LIVIA menanti konfirmasi dari kontak daruratmu.",
+    title: "Menunggu respons selama satu menit",
+    body: "LIVIA menunggu konfirmasi dari kontak daruratmu.",
   },
   {
-    title: "Insiden ditutup",
-    body: "Setelah paling tidak satu kontak mengonfirmasi, insiden dinyatakan selesai. Semua tahapnya tersimpan di log terenkripsi.",
+    title: "Insiden selesai",
+    body: "Begitu setidaknya satu kontak mengonfirmasi, insiden ditandai selesai. Setiap tahap tercatat dalam log terenkripsi.",
   },
 ];
 
 const faq: FaqItem[] = [
   {
-    q: "Apakah ceritaku akan dihakimi?",
-    a: "Tidak. Balasan LIVIA dirancang agar selalu suportif dan tidak menghakimi, jadi kamu bisa cerita apa adanya.",
+    q: "Apakah LIVIA akan menghakimi ceritaku?",
+    a: "Tidak. LIVIA dirancang untuk selalu menjawab dengan bahasa yang suportif dan tidak menghakimi. Kamu bebas bercerita apa adanya.",
   },
   {
-    q: "Bisakah peringatan darurat dibatalkan?",
-    a: "Bisa. Tekan Batalkan dalam 10 detik, sebelum notifikasi terkirim ke kontak daruratmu.",
+    q: "Apakah aku bisa membatalkan peringatan darurat?",
+    a: "Bisa. Kamu punya waktu 10 detik untuk menekan Batalkan sebelum notifikasi dikirim ke kontak daruratmu.",
   },
   {
-    q: "Kenapa kontak darurat wajib diisi?",
-    a: "Ketika keadaan sedang paling berat, orang terdekat sering kali bisa menolong lebih cepat. Kalau kontaknya kosong, LIVIA tidak tahu harus menghubungi siapa.",
+    q: "Mengapa aku wajib menambahkan kontak darurat?",
+    a: "Karena saat kondisi paling berat, bantuan dari orang terdekat bisa datang jauh lebih cepat. Tanpa kontak darurat, LIVIA tidak punya siapa pun untuk dihubungi.",
   },
   {
-    q: "Bagaimana kalau check-in terlewat?",
-    a: "Pengingat dikirim setelah 30 menit. Bila sampai akhir hari belum dijawab, check-in itu ditandai terlewat. Dua kali terlewat berturut-turut bisa membuat LIVIA lebih peka pada tanda risiko.",
+    q: "Apa yang terjadi kalau aku melewatkan check-in?",
+    a: "LIVIA mengirim pengingat setelah 30 menit. Check-in yang belum dijawab sampai akhir hari ditandai terlewat. Jika kamu melewatkan dua check-in berturut-turut, LIVIA bisa menjadi lebih peka terhadap tanda risiko.",
   },
   {
     q: "Apakah LIVIA bisa menggantikan psikolog?",
-    a: "Tidak. LIVIA hanya pendamping awal dan tidak mendiagnosis. Kalau rasa berat itu tidak kunjung reda, temui psikolog atau psikiater.",
+    a: "Tidak. LIVIA adalah pendamping awal dan tidak memberikan diagnosis. Jika perasaan beratmu berlangsung lama, temui psikolog atau psikiater.",
   },
 ];
 
-function Steps({ items, tone = "ink" }: { items: { title: string; body: string }[]; tone?: "ink" | "alert" }) {
+function Steps({
+  items,
+  tone = "ink",
+}: {
+  items: { title: string; body: string }[];
+  tone?: "ink" | "alert";
+}) {
   return (
-    <ol className="space-y-9">
+    <ol className="relative space-y-8 border-l-2 border-line pl-8">
       {items.map((s, i) => (
-        <li key={s.title} className="grid grid-cols-[3rem_1fr] gap-3 md:grid-cols-[4.5rem_1fr]">
+        <li key={s.title} className="relative">
           <span
             aria-hidden
-            className={`text-display leading-none md:text-display-lg md:leading-none ${
-              tone === "alert" ? "text-alert" : "text-main-500"
+            className={`absolute -left-[3.05rem] grid size-9 place-items-center rounded-full text-form-label font-bold ${
+              tone === "alert" ? "bg-alert text-white" : "bg-ink text-paper"
             }`}
           >
             {i + 1}
           </span>
-          <div>
-            <h3 className="text-card-title">{s.title}</h3>
-            <p className="mt-2 max-w-xl text-ink-soft">{s.body}</p>
-          </div>
+          <h3 className="text-card-title">{s.title}</h3>
+          <p className="mt-2 max-w-xl text-ink-soft">{s.body}</p>
         </li>
       ))}
     </ol>
@@ -103,29 +108,35 @@ export default function CaraKerjaPage() {
   return (
     <>
       <PageIntro
-        title="Lima langkah, lalu kamu bisa mulai cerita."
-        lead="Mendaftar cuma makan waktu beberapa menit. Sesudahnya, LIVIA bisa kamu ajak bicara kapan saja."
+        title="Mulai dalam lima langkah."
+        lead="Pendaftaran hanya butuh beberapa menit. Setelah itu, LIVIA siap menemanimu kapan saja."
       />
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
+      <section className="mx-auto max-w-6xl px-5 pl-9">
         <Steps items={onboarding} />
       </section>
 
-      <section id="alur-darurat" className="scroll-mt-24 bg-alert-soft">
+      <section id="alur-darurat" className="mt-24 scroll-mt-24 bg-alert-soft">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-[0.8fr_1.2fr]">
           <div>
-            <h2 className="text-heading text-alert-ink md:text-title">Urutan kejadian saat darurat</h2>
+            <h2 className="text-heading md:text-title text-alert-ink">
+              Apa yang terjadi saat darurat
+            </h2>
             <p className="mt-5 max-w-sm text-ink-soft">
-              Prosedurnya sama saja, entah kamu yang menekan tombol darurat atau LIVIA yang
-              mendeteksinya sendiri.
+              Prosedur yang sama berlaku baik saat kamu menekan tombol darurat
+              sendiri maupun saat LIVIA mendeteksinya secara otomatis.
             </p>
           </div>
-          <Steps items={emergencyFlow} tone="alert" />
+          <div className="pl-4">
+            <Steps items={emergencyFlow} tone="alert" />
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="text-heading md:text-title">Yang paling sering ditanyakan</h2>
+      <section className="mx-auto mt-24 max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">
+          Pertanyaan yang sering muncul
+        </h2>
         <div className="mt-8">
           <Faq items={faq} />
         </div>

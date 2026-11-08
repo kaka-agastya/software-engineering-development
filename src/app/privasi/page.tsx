@@ -1,53 +1,88 @@
 import type { Metadata } from "next";
+import { PageIntro } from "@/components/PageIntro";
 import { TEAM_EMAIL, crisisContacts } from "@/lib/site";
-import { PageIntro } from "../_components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Privasi & bantuan",
-  description: "Data yang disimpan LIVIA, cara melindunginya, hakmu atas data itu, dan layanan bantuan krisis.",
+  description:
+    "Data apa yang disimpan LIVIA, bagaimana dilindungi, hakmu atas data, dan layanan bantuan krisis.",
 };
 
 const dataRows = [
-  { what: "Profil akun", detail: "Nama, nama panggilan, nomor ponsel, kata sandi", why: "Masuk ke akun dan memverifikasi nomor" },
-  { what: "Kontak darurat", detail: "Nama, nomor ponsel, hubungan", why: "Mengabari orang terdekatmu saat darurat" },
-  { what: "Percakapan", detail: "Pesanmu dan balasan LIVIA", why: "Menyambung percakapan dan mendukung pencarian" },
-  { what: "Catatan emosi", detail: "Suasana hati, skor risiko, waktu", why: "Grafik tren dan pendeteksian tanda krisis" },
-  { what: "Check-in", detail: "Jadwal, jawaban, waktu respons", why: "Menyapamu pada jadwal yang kamu pilih" },
-  { what: "Log insiden", detail: "Tahapan prosedur darurat dan lokasi", why: "Memastikan bantuan berjalan dan dapat ditelusuri" },
+  {
+    what: "Profil akun",
+    detail: "Nama, nama panggilan, nomor ponsel, kata sandi",
+    why: "Masuk ke akun dan verifikasi nomor",
+  },
+  {
+    what: "Kontak darurat",
+    detail: "Nama, nomor ponsel, hubungan",
+    why: "Menghubungi orang terdekatmu saat darurat",
+  },
+  {
+    what: "Percakapan",
+    detail: "Pesanmu dan balasan LIVIA",
+    why: "Melanjutkan percakapan dan fitur pencarian",
+  },
+  {
+    what: "Catatan emosi",
+    detail: "Suasana hati, skor risiko, waktu",
+    why: "Grafik tren dan deteksi tanda krisis",
+  },
+  {
+    what: "Check-in",
+    detail: "Jadwal, jawaban, waktu respons",
+    why: "Menyapa sesuai jadwal pilihanmu",
+  },
+  {
+    what: "Log insiden",
+    detail: "Tahapan prosedur darurat dan lokasi",
+    why: "Memastikan bantuan berjalan dan bisa ditelusuri",
+  },
 ];
 
 const deleteSteps = [
-  "Masuk ke Halaman Profil di aplikasi.",
-  "Ketuk Hapus Akun.",
-  "Baca peringatan yang muncul, lalu ketuk Ya, hapus akun.",
+  "Buka Halaman Profil.",
+  "Pilih Hapus Akun.",
+  "Baca peringatannya, lalu pilih Ya, hapus akun.",
 ];
 
 export default function PrivasiPage() {
   return (
     <>
       <PageIntro
-        title="Ceritamu tetap milikmu."
-        lead="Yang kamu bagikan di LIVIA sangat pribadi, dan kami menyadari itu. Di bawah ini kami jelaskan apa adanya: data apa yang disimpan, cara melindunginya, dan kendali apa yang ada di tanganmu."
+        title="Ceritamu milikmu."
+        lead="Kami tahu yang kamu bagikan di LIVIA sangat pribadi. Berikut penjelasan jujur tentang data yang disimpan, bagaimana kami melindunginya, dan kendali yang kamu punya."
       />
 
-      <section className="mx-auto max-w-6xl px-5 pt-20">
-        <h2 className="text-heading md:text-title">Data yang kami simpan</h2>
-        <p className="mt-3 max-w-2xl text-ink-soft">Semua data berikut tersimpan dalam keadaan terenkripsi.</p>
-        <div className="mt-8 overflow-x-auto border-y border-line">
+      <section className="mx-auto max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">Data yang disimpan</h2>
+        <p className="mt-3 max-w-2xl text-ink-soft">
+          Seluruh data di bawah ini disimpan dalam bentuk terenkripsi.
+        </p>
+        <div className="mt-8 overflow-x-auto rounded-2xl border border-line">
           <table className="w-full min-w-[640px] text-left">
-            <thead className="text-small text-muted">
+            <thead className="bg-paper-deep text-small text-ink-soft">
               <tr>
-                <th scope="col" className="py-3 pr-5 font-semibold">Data</th>
-                <th scope="col" className="py-3 pr-5 font-semibold">Isinya</th>
-                <th scope="col" className="py-3 font-semibold">Dipakai untuk</th>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Data
+                </th>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Isinya
+                </th>
+                <th scope="col" className="px-5 py-3 font-semibold">
+                  Untuk apa
+                </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-line border-t border-line">
+            <tbody className="divide-y divide-line">
               {dataRows.map((r) => (
                 <tr key={r.what}>
-                  <th scope="row" className="py-4 pr-5 font-semibold text-ink">{r.what}</th>
-                  <td className="py-4 pr-5 text-ink-soft">{r.detail}</td>
-                  <td className="py-4 text-ink-soft">{r.why}</td>
+                  <th scope="row" className="px-5 py-4 font-semibold">
+                    {r.what}
+                  </th>
+                  <td className="px-5 py-4 text-ink-soft">{r.detail}</td>
+                  <td className="px-5 py-4 text-ink-soft">{r.why}</td>
                 </tr>
               ))}
             </tbody>
@@ -55,78 +90,92 @@ export default function PrivasiPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-12 px-5 pt-20 md:grid-cols-2">
-        <div>
+      <section className="mx-auto mt-20 grid max-w-6xl gap-6 px-5 md:grid-cols-2">
+        <div className="rounded-3xl bg-paper-deep p-8">
           <h2 className="text-heading">Kapan datamu dibagikan</h2>
           <p className="mt-4 text-ink-soft">
-            Satu-satunya keadaan adalah ketika prosedur darurat berjalan. Kontak daruratmu menerima
-            pemberitahuan beserta tautan lokasimu. Isi percakapan dan catatan emosimu tidak pernah
-            sampai ke mereka.
+            Hanya dalam satu keadaan: saat prosedur darurat berjalan. Kontak
+            daruratmu menerima pemberitahuan dan tautan lokasimu. Isi percakapan
+            dan catatan emosimu tidak pernah dikirimkan kepada mereka.
           </p>
         </div>
-        <div className="border-l-4 border-caution-700 pl-6">
-          <h2 className="text-heading">Batas kemampuan LIVIA</h2>
+        <div className="rounded-3xl border border-caution-700 bg-caution-50 p-8">
+          <h2 className="text-heading">Batasan LIVIA</h2>
           <p className="mt-4 text-ink-soft">
-            LIVIA adalah pendamping berbasis AI. Ia tidak mendiagnosis, dan tidak menggantikan
-            psikolog, psikiater, atau layanan medis. AI juga bisa salah membaca keadaan, karena itu
-            tombol darurat selalu ada untuk kamu tekan sendiri.
+            LIVIA adalah pendamping berbasis AI. Ia tidak memberikan diagnosis
+            klinis dan tidak menggantikan psikolog, psikiater, maupun layanan
+            medis. AI juga bisa keliru membaca situasi, jadi tombol darurat
+            selalu tersedia untuk kamu tekan sendiri.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="text-heading md:text-title">Menghapus akun dan semua datanya</h2>
+      <section className="mx-auto mt-20 max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">
+          Menghapus akun dan seluruh data
+        </h2>
         <p className="mt-3 max-w-2xl text-ink-soft">
-          Akunmu bisa dihapus kapan saja. Profil, kontak darurat, percakapan, catatan emosi, jadwal
-          check-in, dan riwayat darurat akan terhapus permanen, dan tidak bisa dikembalikan.
+          Kamu bisa menghapus akun kapan saja. Profil, kontak darurat,
+          percakapan, catatan emosi, jadwal check-in, dan riwayat darurat akan
+          dihapus permanen dan tidak bisa dipulihkan.
         </p>
-        <ol className="mt-8 grid gap-8 md:grid-cols-3">
+        <ol className="mt-8 grid gap-4 md:grid-cols-3">
           {deleteSteps.map((s, i) => (
-            <li key={s} className="flex gap-4">
-              <span aria-hidden className="w-7 shrink-0 text-display leading-none text-main-500">
+            <li
+              key={s}
+              className="flex gap-4 rounded-2xl border border-line p-5"
+            >
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink text-form-label font-bold text-paper">
                 {i + 1}
               </span>
-              <span>{s}</span>
+              <span className="">{s}</span>
             </li>
           ))}
         </ol>
       </section>
 
-      <section id="bantuan" className="scroll-mt-20 bg-main-700">
+      <section id="bantuan" className="mt-24 scroll-mt-24 bg-ink text-paper">
         <div className="mx-auto max-w-6xl px-5 py-20">
-          <h2 className="text-heading text-paper md:text-title">Bantuan selain LIVIA</h2>
-          <p className="mt-4 max-w-2xl text-paper/85">
-            Kalau kamu atau orang di sekitarmu dalam bahaya, jangan menunda. Telepon layanan di bawah
-            ini.
+          <h2 className="text-heading text-paper md:text-title">
+            Bantuan di luar LIVIA
+          </h2>
+          <p className="mt-4 max-w-2xl text-paper/80">
+            Jika kamu atau orang di sekitarmu sedang dalam bahaya, jangan
+            menunggu. Hubungi layanan berikut.
           </p>
-          <ul className="mt-10 grid gap-10 md:grid-cols-2">
+          <ul className="mt-10 grid gap-6 md:grid-cols-2">
             {crisisContacts.map((c) => (
-              <li key={c.number}>
-                <p className="text-paper/85">{c.name}</p>
+              <li key={c.number} className="rounded-3xl bg-paper/10 p-7">
+                <p className="text-paper/75">{c.name}</p>
                 <a
                   href={`tel:${c.tel}`}
-                  className="mt-2 block text-display font-bold tabular-nums text-caution-500 underline-offset-4 hover:underline md:text-display-lg"
+                  className="mt-2 block text-display underline-offset-4 hover:underline"
                 >
                   {c.number}
                 </a>
-                <p className="mt-3 text-small text-paper/85">{c.note}</p>
+                <p className="mt-3 text-small text-paper/75">{c.note}</p>
               </li>
             ))}
           </ul>
-          <p className="mt-8 text-small text-paper/80">
-            Puskesmas, rumah sakit, atau unit gawat darurat terdekat juga bisa langsung kamu datangi.
+          <p className="mt-6 text-small text-paper/60">
+            Kamu juga bisa datang ke puskesmas, rumah sakit, atau unit gawat
+            darurat terdekat.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="text-heading">Ada pertanyaan soal privasi?</h2>
-        <p className="mt-4 max-w-2xl text-ink-soft">
-          Tulis ke tim pengembang LIVIA di{" "}
-          <a href={`mailto:${TEAM_EMAIL}`} className="font-semibold text-ink underline underline-offset-4">
+      <section className="mx-auto mt-20 max-w-3xl px-5">
+        <h2 className="text-heading">Pertanyaan tentang privasi</h2>
+        <p className="mt-4 text-ink-soft">
+          Hubungi tim pengembang LIVIA di{" "}
+          <a
+            href={`mailto:${TEAM_EMAIL}`}
+            className="font-semibold text-ink underline underline-offset-4"
+          >
             {TEAM_EMAIL}
           </a>
-          . Alamat ini bukan layanan darurat, jadi balasannya mungkin tidak langsung datang.
+          . Email ini bukan layanan darurat dan mungkin tidak dibalas
+          secepatnya.
         </p>
       </section>
     </>

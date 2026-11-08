@@ -1,139 +1,164 @@
 import type { Metadata } from "next";
+import { PageIntro } from "@/components/PageIntro";
 import { TEAM_EMAIL } from "@/lib/site";
-import { PageIntro } from "../_components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Untuk kontak darurat",
   description:
-    "Untuk kamu yang didaftarkan sebagai kontak darurat di LIVIA: arti SMS yang masuk dan langkah yang perlu diambil.",
+    "Panduan bagi orang yang didaftarkan sebagai kontak darurat di LIVIA: arti SMS yang diterima dan apa yang perlu dilakukan.",
 };
 
 const emergencySteps = [
   {
-    title: "Telepon dia sekarang juga",
-    body: "Kalau tidak diangkat, coba lagi. Kirim juga pesan singkat bahwa kamu sedang menuju ke sana atau sedang mencari bantuan.",
+    title: "Hubungi orang tersebut sekarang",
+    body: "Telepon langsung. Jika tidak diangkat, coba lagi dan kirim pesan singkat bahwa kamu sedang menuju atau mencari bantuan.",
   },
   {
-    title: "Buka tautan lokasinya",
-    body: "Tautan di SMS menunjukkan posisi terakhirnya. Datanglah kalau bisa, atau minta orang yang lebih dekat untuk ke sana.",
+    title: "Buka tautan lokasi",
+    body: "Tautan di SMS menunjukkan lokasi terakhirnya. Datangi jika memungkinkan, atau minta orang yang lebih dekat untuk datang.",
   },
   {
-    title: "Beri konfirmasi bahwa kamu menanggapi",
-    body: "Ikuti petunjuk konfirmasi di SMS supaya LIVIA tahu bantuan sedang berjalan. LIVIA menunggu konfirmasi ini selama satu menit.",
+    title: "Konfirmasi bahwa kamu merespons",
+    body: "Ikuti petunjuk konfirmasi di SMS agar LIVIA tahu bantuan sedang berjalan. LIVIA menunggu konfirmasi selama satu menit.",
   },
   {
-    title: "Telepon 112 kalau ada bahaya langsung",
-    body: "Bila dia tidak bisa dihubungi dan kamu khawatir nyawanya terancam, telepon layanan darurat 112 lalu sebutkan lokasinya.",
+    title: "Hubungi 112 jika ada bahaya langsung",
+    body: "Jika ia tidak bisa dihubungi dan kamu khawatir nyawanya terancam, hubungi layanan darurat 112 dan sebutkan lokasinya.",
   },
 ];
 
 const doList = [
-  "Tanyakan terus terang apakah dia sedang berpikir untuk menyakiti diri. Menanyakannya tidak akan mendorong dia melakukannya.",
-  "Lebih banyak mendengarkan daripada berbicara.",
-  "Tetap bersamanya, atau pastikan ada orang lain yang menemani.",
-  "Bila memungkinkan, singkirkan benda yang bisa membahayakan.",
-  "Bantu dia tersambung ke psikolog, psikiater, atau layanan kesehatan.",
+  "Tanyakan langsung apakah ia sedang berpikir untuk menyakiti diri. Bertanya tidak akan memicu tindakan itu.",
+  "Dengarkan lebih banyak daripada bicara.",
+  "Temani, atau pastikan ada orang lain yang menemani.",
+  "Jauhkan benda yang bisa membahayakan bila memungkinkan.",
+  "Bantu ia terhubung ke psikolog, psikiater, atau layanan kesehatan.",
 ];
 
 const dontList = [
-  "Menghakimi, menasihati panjang lebar, atau meremehkan perasaannya.",
-  "Berjanji menyimpan rahasia ketika keselamatannya terancam.",
-  "Membiarkannya sendiri selagi keadaan masih genting.",
+  "Menghakimi, menceramahi, atau menyepelekan perasaannya.",
+  "Berjanji merahasiakan bila keselamatannya terancam.",
+  "Meninggalkannya sendirian saat kondisi masih genting.",
 ];
 
 export default function KontakDaruratPage() {
   return (
     <>
       <PageIntro
-        title="Seseorang memilihmu sebagai kontak daruratnya."
-        lead="Halaman ini ditujukan bagi kamu yang mendapat SMS dari LIVIA. Tidak ada aplikasi yang perlu dipasang. Kamu hanya perlu tahu arti pesannya dan apa yang bisa kamu lakukan."
+        title="Seseorang memercayaimu sebagai kontak darurat."
+        lead="Halaman ini untuk kamu yang menerima SMS dari LIVIA. Kamu tidak perlu memasang aplikasi apa pun. Cukup pahami arti pesannya dan apa yang bisa kamu lakukan."
       />
 
-      {/* Langkah darurat ditaruh paling atas: orang yang baru menerima SMS darurat mencari ini lebih dulu */}
-      <section id="saat-darurat" className="scroll-mt-20 bg-alert-soft">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:py-20">
-          <h2 className="text-heading text-alert-ink md:text-title">Baru menerima notifikasi darurat?</h2>
-          <ol className="mt-10 grid gap-x-12 gap-y-9 md:grid-cols-2">
-            {emergencySteps.map((s, i) => (
-              <li key={s.title} className="flex gap-5">
-                <span aria-hidden className="w-7 shrink-0 text-display leading-none text-alert">
-                  {i + 1}
-                </span>
-                <div>
-                  <h3 className="text-card-title text-alert-ink">{s.title}</h3>
-                  <p className="mt-1.5 text-ink-soft">{s.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-          {/*
-            TODO (catatan desain): FR-17 & FR-18 menyebut LIVIA menunggu konfirmasi kontak,
-            tetapi mekanisme konfirmasinya belum didefinisikan di use-case specification.
-            Jika memakai tautan, halaman konfirmasi bisa dibuat di app/k/[token]/page.tsx.
-          */}
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-5 pt-20">
-        <h2 className="text-heading md:text-title">Dua macam SMS yang bisa masuk</h2>
-        <div className="mt-8 grid gap-12 md:grid-cols-2">
-          <article>
+      <section className="mx-auto max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">
+          Dua jenis SMS yang mungkin kamu terima
+        </h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <article className="rounded-3xl bg-paper-deep p-7">
             <h3 className="text-card-title">Pemberitahuan pendaftaran</h3>
             <p className="mt-2 text-ink-soft">
-              Masuk ketika nomormu didaftarkan atau datamu diperbarui. Kamu tidak perlu melakukan apa
-              pun.
+              Dikirim saat nomormu didaftarkan atau datamu diperbarui. Tidak ada
+              tindakan yang diperlukan.
             </p>
-            <blockquote className="mt-5 rounded-2xl rounded-tl-md bg-paper-deep px-4 py-3 text-small">
-              Livia: Rani telah mendaftarkan nomor Anda sebagai kontak daruratnya. Anda akan menerima
-              pemberitahuan terkait kondisi darurat Rani.
+            <blockquote className="mt-5 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-small shadow-sm">
+              Livia: Rani telah mendaftarkan nomor Anda sebagai kontak
+              daruratnya. Anda akan menerima pemberitahuan terkait kondisi
+              darurat Rani.
             </blockquote>
           </article>
 
-          <article>
-            <h3 className="text-card-title text-alert-ink">Notifikasi darurat</h3>
+          <article className="rounded-3xl bg-alert-soft p-7">
+            <h3 className="text-card-title text-alert-ink">
+              Notifikasi darurat
+            </h3>
             <p className="mt-2 text-ink-soft">
-              Masuk ketika orang yang mendaftarkanmu menekan tombol darurat, atau ketika LIVIA menangkap
-              risiko tinggi. Langsung bertindak.
+              Dikirim saat orang yang mendaftarkanmu menekan tombol darurat atau
+              LIVIA mendeteksi risiko tinggi. Segera bertindak.
             </p>
-            <blockquote className="mt-5 rounded-2xl rounded-tl-md bg-alert-soft px-4 py-3 text-small">
-              Livia: Rani mungkin sedang membutuhkan bantuan. Lokasi terakhirnya: livia.app/l/8f2k. Mohon
-              segera hubungi Rani dan konfirmasi lewat tautan tersebut.
+            <blockquote className="mt-5 rounded-2xl rounded-tl-md bg-white px-4 py-3 text-small shadow-sm">
+              Livia: Rani mungkin sedang membutuhkan bantuan. Lokasi
+              terakhirnya: livia.app/l/8f2k. Mohon segera hubungi Rani dan
+              konfirmasi lewat tautan tersebut.
             </blockquote>
           </article>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pt-20">
-        <h2 className="text-heading md:text-title">Mendampingi dengan aman</h2>
-        <div className="mt-8 grid gap-12 md:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <h3 className="text-card-title">Yang bisa membantu</h3>
-            <ul className="mt-4 list-disc space-y-3 pl-5 marker:text-main-500">
+      <section
+        id="saat-darurat"
+        className="mx-auto mt-24 max-w-6xl scroll-mt-24 px-5"
+      >
+        <h2 className="text-heading md:text-title">
+          Jika kamu menerima notifikasi darurat
+        </h2>
+        <ol className="mt-10 grid gap-6 md:grid-cols-2">
+          {emergencySteps.map((s, i) => (
+            <li
+              key={s.title}
+              className="flex gap-5 border-t-2 border-alert pt-5"
+            >
+              <span className="text-title tabular-nums text-alert">
+                {i + 1}
+              </span>
+              <div>
+                <h3 className="text-card-title">{s.title}</h3>
+                <p className="mt-1.5 text-ink-soft">{s.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="mx-auto mt-24 max-w-6xl px-5">
+        <h2 className="text-heading md:text-title">
+          Cara mendampingi dengan aman
+        </h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="rounded-3xl bg-calm p-7">
+            <h3 className="text-card-title text-calm-ink">Yang membantu</h3>
+            <ul className="mt-4 space-y-3">
               {doList.map((d) => (
-                <li key={d}>{d}</li>
+                <li key={d} className="flex gap-3">
+                  <span
+                    aria-hidden
+                    className="mt-2.5 size-1.5 shrink-0 rounded-full bg-calm-ink"
+                  />
+                  {d}
+                </li>
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="text-card-title">Yang perlu dihindari</h3>
-            <ul className="mt-4 list-disc space-y-3 pl-5 text-ink-soft marker:text-muted">
+          <div className="rounded-3xl border border-line p-7">
+            <h3 className="text-card-title">Yang sebaiknya dihindari</h3>
+            <ul className="mt-4 space-y-3">
               {dontList.map((d) => (
-                <li key={d}>{d}</li>
+                <li key={d} className="flex gap-3 text-ink-soft">
+                  <span
+                    aria-hidden
+                    className="mt-2.5 size-1.5 shrink-0 rounded-full bg-muted"
+                  />
+                  {d}
+                </li>
               ))}
             </ul>
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
-        <h2 className="text-heading">Ingin berhenti menjadi kontak darurat?</h2>
-        <p className="mt-4 max-w-2xl text-ink-soft">
-          Sampaikan pada orang yang mendaftarkanmu, supaya dia bisa mengganti kontaknya di aplikasi.
-          Kalau itu tidak memungkinkan, kirim email berisi nomor ponselmu ke{" "}
-          <a href={`mailto:${TEAM_EMAIL}`} className="font-semibold text-ink underline underline-offset-4">
+      <section className="mx-auto mt-24 max-w-3xl px-5">
+        <h2 className="text-heading">
+          Tidak ingin lagi menjadi kontak darurat?
+        </h2>
+        <p className="mt-4 text-ink-soft">
+          Bicarakan dengan orang yang mendaftarkanmu agar ia bisa mengganti
+          kontaknya di aplikasi. Jika tidak memungkinkan, kirim email ke{" "}
+          <a
+            href={`mailto:${TEAM_EMAIL}`}
+            className="font-semibold text-ink underline underline-offset-4"
+          >
             {TEAM_EMAIL}
-          </a>
-          .
+          </a>{" "}
+          dengan menyertakan nomor ponselmu.
         </p>
       </section>
     </>

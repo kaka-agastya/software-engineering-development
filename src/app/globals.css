@@ -1,9 +1,12 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@custom-variant dark (&:is(.dark *));
 
 /*
- * Design system LIVIA, versi "malam menuju pagi".
- * Warna inti (main, alert, caution 100/500/700) tetap persis dari design system.
- * Yang berubah: netral jadi sejuk dan ada tambahan warna night.
+ * Design system LIVIA
+ * Warna inti (main, alert, caution 100/500/700) diambil persis dari design system.
+ * Tint 50 diturunkan untuk latar lembut, karena 100 terlalu pekat untuk area luas.
  */
 @theme {
   /* Main */
@@ -25,15 +28,14 @@
   --color-caution-700: #fed036;
 
   /* Netral */
-  --color-night: #0c3c4c; /* main/700 digelapkan: langit paling awal */
-  --color-paper: #f7fafa;
-  --color-paper-deep: #e6eff1;
-  --color-line: #cfdde1;
+  --color-paper: #fffbf7;
+  --color-paper-deep: #f6efe7;
+  --color-line: #e8e0d7;
 
   /* Alias semantik yang dipakai komponen */
   --color-ink: #105065; /* main/700: judul, tombol utama */
   --color-ink-soft: #3d535b; /* teks isi */
-  --color-muted: #586a71; /* teks pendukung */
+  --color-muted: #66767d; /* teks pendukung */
   --color-alert: #902121; /* alert/700: aman untuk teks & tombol */
   --color-alert-ink: #902121;
   --color-alert-soft: #f8ecec;
@@ -117,23 +119,20 @@ body {
 
 @layer base {
   h1,
-  h2 {
-    text-wrap: balance;
-  }
-
-  h1,
   h2,
   h3 {
     color: var(--color-ink);
   }
+  /* Dari shadcn: warna garis default komponen */
+  * {
+    @apply border-border;
+  }
 }
 
-/* Dua lapis warna supaya fokus tetap terlihat di latar gelap maupun terang */
 :focus-visible {
-  outline: 3px solid var(--color-night);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 2px var(--color-caution-500);
-  border-radius: 4px;
+  outline: 3px solid var(--color-main-500);
+  outline-offset: 3px;
+  border-radius: 6px;
 }
 
 @keyframes bubble-in {
@@ -158,4 +157,59 @@ body {
   .bubble {
     animation: none;
   }
+}
+
+/*
+ * Token komponen shadcn/ui, diarahkan ke palet LIVIA.
+ * Catatan: --color-muted TIDAK dipetakan karena LIVIA sudah memakai
+ * `text-muted` untuk teks abu-abu. Di components/ui, `bg-muted`
+ * diganti `bg-secondary`.
+ */
+@theme inline {
+  --font-heading: var(--font-inter);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  --background: #fffbf7; /* paper */
+  --foreground: #3d535b; /* ink-soft */
+  --card: #ffffff;
+  --card-foreground: #3d535b;
+  --popover: #ffffff;
+  --popover-foreground: #3d535b;
+  --primary: #105065; /* main/700 */
+  --primary-foreground: #fffbf7;
+  --secondary: #f6efe7; /* paper-deep */
+  --secondary-foreground: #105065;
+  --muted-foreground: #66767d;
+  --accent: #eaf1f3; /* main/50 */
+  --accent-foreground: #105065;
+  --destructive: #902121; /* alert/700 */
+  --border: #e8e0d7; /* line */
+  --input: #e8e0d7;
+  --ring: #3b6978; /* main/500 */
+  --radius: 0.75rem;
 }

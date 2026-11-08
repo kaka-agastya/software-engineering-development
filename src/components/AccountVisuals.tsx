@@ -107,7 +107,7 @@ export function SmsNotice() {
   ];
   return (
     <div className="grid gap-3">
-      <div className="rounded-2xl bg-night p-5 text-paper">
+      <div className="rounded-2xl bg-ink p-5 text-paper">
         <p className="flex justify-between text-caption text-paper/75">
           <span>SMS Pemberitahuan</span>
           <span>sekarang</span>

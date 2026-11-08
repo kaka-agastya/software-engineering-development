@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  ContactManager,
+  LoginForm,
+  RegisterForm,
+  SmsNotice,
+} from "@/components/AccountVisuals";
 import { ChatPreview } from "@/components/ChatPreview";
 import {
   AnalysisTags,
@@ -9,13 +15,12 @@ import {
   SearchPreview,
   TrendChart,
 } from "@/components/FeatureVisuals";
-import { ContactManager, LoginForm, RegisterForm, SmsNotice } from "../_components/AccountVisuals";
-import { PageIntro } from "../_components/PageIntro";
+import { PageIntro } from "@/components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Fitur",
   description:
-    "Teman bicara yang empatik, pembacaan emosi, check-in berkala, bantuan darurat, kontak darurat, dan akun yang aman di LIVIA.",
+    "Percakapan empatik, analisis emosi, check-in berkala, bantuan darurat, kontak darurat, dan akun yang aman di LIVIA.",
 };
 
 type Feature = {
@@ -30,12 +35,12 @@ type Feature = {
 const features: Feature[] = [
   {
     id: "percakapan",
-    title: "Teman bicara yang menenangkan",
-    body: "Tuliskan yang sedang kamu rasakan. Balasan LIVIA suportif, tidak menghakimi, dan berpusat pada dukungan untukmu.",
+    title: "Percakapan yang menenangkan",
+    body: "Ceritakan apa yang kamu rasakan. LIVIA menjawab dengan bahasa yang suportif, tidak menghakimi, dan fokus pada dukunganmu.",
     points: [
-      "Jawaban datang dalam hitungan detik",
-      "Ada saran ringkas, misalnya latihan napas, ketika kamu sedih, cemas, atau lelah",
-      "Tidak mengeluarkan diagnosis klinis",
+      "Balasan muncul dalam hitungan detik",
+      "Saran singkat seperti latihan napas saat kamu sedang sedih, cemas, atau lelah",
+      "Tidak memberikan diagnosis klinis",
     ],
     visual: (
       <div className="rounded-2xl border border-line bg-white/70 p-5">
@@ -45,24 +50,24 @@ const features: Feature[] = [
   },
   {
     id: "analisis",
-    title: "Membaca emosimu saat itu juga",
-    body: "Tiap pesan diperiksa untuk menangkap emosi dan ungkapan yang patut dikhawatirkan. Hasilnya menjadi catatan emosi pribadimu.",
+    title: "Mengenali emosimu secara langsung",
+    body: "Setiap pesan dibaca untuk mengenali emosi dan ungkapan yang mengkhawatirkan. Hasilnya disimpan sebagai catatan emosi pribadimu.",
     points: [
-      "Kata atau ungkapan berisiko dikenali seketika",
-      "Pola emosi dibaca dari waktu ke waktu untuk melihat tanda krisis",
-      "Seluruh catatan tersimpan terenkripsi",
+      "Mengenali kata atau ungkapan berisiko saat itu juga",
+      "Membaca pola emosi dari waktu ke waktu untuk melihat tanda krisis",
+      "Semua catatan disimpan terenkripsi",
     ],
     visual: <AnalysisTags />,
   },
   {
     id: "darurat",
     title: "Tombol darurat dan deteksi otomatis",
-    body: "Tombol merah di layar utama bisa kamu tekan setiap kali perlu pertolongan. Prosedur darurat juga berjalan sendiri bila LIVIA menangkap risiko tinggi di percakapan atau check-in.",
+    body: "Tekan tombol merah di layar utama kapan pun kamu butuh pertolongan. LIVIA juga akan memulai prosedur darurat sendiri jika mendeteksi risiko tinggi dalam percakapan atau check-in.",
     points: [
-      "Ada hitung mundur 10 detik untuk memilih Batalkan atau Lanjutkan",
-      "SMS memuat tautan lokasimu, dengan akurasi sampai 50 meter",
-      "Selama satu menit LIVIA menunggu untuk memastikan ada kontak yang menanggapi",
-      "Semua tahap masuk ke log insiden terenkripsi",
+      "Hitung mundur 10 detik dengan pilihan Batalkan atau Lanjutkan",
+      "SMS berisi tautan lokasimu dengan akurasi hingga 50 meter",
+      "LIVIA menunggu satu menit untuk memastikan ada kontak yang merespons",
+      "Setiap tahap tercatat dalam log insiden terenkripsi",
     ],
     visual: <EmergencyCountdown />,
     emphasis: true,
@@ -70,35 +75,35 @@ const features: Feature[] = [
   {
     id: "kontak",
     title: "Kelola kontak daruratmu",
-    body: "Pilih minimal satu orang yang gampang dihubungi, bisa keluarga atau sahabat. Daftarnya ada di Halaman Profil dan bisa kamu ubah kapan pun.",
+    body: "Daftarkan setidaknya satu orang yang mudah dihubungi, seperti keluarga atau sahabat. Daftarnya ada di halaman profil dan bisa kamu ubah kapan saja.",
     points: [
       "Isi nama lengkap, nomor ponsel, dan hubunganmu dengan kontak tersebut",
-      "Nomor dicek formatnya, harus lengkap dengan kode negara seperti +62",
-      "Kontak bisa ditambah, diubah, atau dihapus, dan penghapusan selalu meminta konfirmasi",
-      "Data kontak tersimpan terenkripsi",
+      "Nomor ponsel harus format E.164, lengkap dengan kode negara seperti +62",
+      "Tambah, ubah, atau hapus kontak, dengan konfirmasi sebelum menghapus",
+      "Akun baru aktif penuh setelah kontak darurat pertama tersimpan",
     ],
     visual: <ContactManager />,
   },
   {
     id: "sms",
     title: "SMS pemberitahuan untuk kontak darurat",
-    body: "Begitu kontak disimpan atau diperbarui, LIVIA otomatis mengirim SMS supaya orang itu tahu dirinya terdaftar sebagai kontak daruratmu.",
+    body: "Setiap kali kontak ditambahkan atau diperbarui, LIVIA mengirim SMS supaya orang tersebut tahu nomornya terdaftar sebagai kontak daruratmu.",
     points: [
-      "Terkirim ke setiap kontak segera setelah datanya disimpan",
-      "Kontakmu tidak perlu memasang aplikasi",
-      "Status pengiriman dicatat untuk setiap kontak",
-      "Kalau gagal, SMS dikirim ulang, dan kamu diberi tahu bila tetap tidak terkirim",
+      "Dikirim segera setelah data kontak disimpan",
+      "Kontak tidak perlu memasang aplikasi",
+      "Status setiap SMS dicatat: menunggu, terkirim, atau gagal",
+      "SMS yang gagal dikirim ulang, dan kamu diberi tahu bila tetap gagal",
     ],
     visual: <SmsNotice />,
   },
   {
     id: "check-in",
-    title: "Sapaan check-in berkala",
-    body: "Sesuai jadwal, LIVIA bertanya bagaimana kabarmu. Kamu tinggal memilih suasana hati, menandai hal yang sedang berpengaruh, dan menambah catatan kalau mau.",
+    title: "Check-in berkala",
+    body: "LIVIA menyapa sesuai jadwal untuk menanyakan kabarmu. Pilih suasana hati, tandai hal yang sedang memengaruhimu, dan tulis catatan bila ingin.",
     points: [
-      "Jadwal diusulkan otomatis mengikuti kebiasaanmu",
-      "Jadwal bisa kamu atur, ubah, atau matikan sendiri",
-      "Pengingat menyusul bila check-in belum terjawab dalam 30 menit",
+      "Usulan jadwal otomatis berdasarkan kebiasaanmu",
+      "Atur, ubah, atau nonaktifkan jadwal sendiri",
+      "Pengingat dikirim jika check-in belum dijawab dalam 30 menit",
     ],
     visual: (
       <div className="grid gap-3">
@@ -109,23 +114,23 @@ const features: Feature[] = [
   },
   {
     id: "catatan",
-    title: "Catatan dan grafik emosi",
-    body: "Pantau perubahan perasaanmu lewat grafik, dan tambahkan catatan sendiri kapan pun dengan memilih ikon suasana hati.",
+    title: "Catatan dan tren emosi",
+    body: "Lihat perjalanan perasaanmu dalam grafik dan tambahkan catatan sendiri kapan saja dengan memilih ikon suasana hati.",
     points: [
-      "Tujuh hari terakhir tampil secara bawaan",
-      "Rentang tanggal bisa kamu tentukan",
-      "Catatan manual punya lima pilihan suasana hati",
+      "Tampilan bawaan tujuh hari terakhir",
+      "Pilih rentang tanggal sendiri",
+      "Catatan manual dengan lima pilihan suasana hati",
     ],
     visual: <TrendChart />,
   },
   {
     id: "riwayat",
     title: "Riwayat percakapan",
-    body: "Cari percakapan lama dengan kata kunci, misalnya saat ingin menemukan lagi saran yang dulu terasa membantu.",
+    body: "Temukan lagi percakapan lama dengan kata kunci, misalnya untuk mengingat saran yang pernah membantumu.",
     points: [
-      "Pencarian memakai kata kunci",
-      "Percakapan tersimpan terenkripsi",
-      "Semua data bisa dihapus kapan saja dengan menghapus akun",
+      "Pencarian berdasarkan kata kunci",
+      "Percakapan disimpan terenkripsi",
+      "Hapus seluruh data kapan pun lewat penghapusan akun",
     ],
     visual: <SearchPreview />,
   },
@@ -134,20 +139,20 @@ const features: Feature[] = [
     title: "Daftar dengan nomor ponselmu",
     body: "Buat akun dengan nama lengkap, nama panggilan, nomor ponsel, dan kata sandi. Nomormu diverifikasi lewat kode OTP yang dikirim melalui SMS.",
     points: [
-      "Nomor ponsel ditulis lengkap dengan kode negara, misalnya +62 812…",
-      "Kode OTP yang salah atau kedaluwarsa bisa diminta ulang",
+      "Nomor ponsel harus format E.164, misalnya +6281234567890",
+      "Kode OTP berlaku 5 menit dan bisa dikirim ulang",
       "Satu nomor hanya bisa dipakai untuk satu akun",
-      "Akun aktif penuh setelah kamu menyimpan minimal satu kontak darurat",
+      "Kata sandi disimpan sebagai hash, tidak pernah dalam bentuk asli",
     ],
     visual: <RegisterForm />,
   },
   {
     id: "masuk",
     title: "Masuk ke akunmu",
-    body: "Sudah punya akun? Cukup masukkan nomor ponsel dan kata sandi, lalu kamu langsung kembali ke Halaman Home.",
+    body: "Sudah punya akun? Masukkan nomor ponsel dan kata sandi untuk kembali ke akunmu.",
     points: [
-      "Kredensial disimpan dalam bentuk terenkripsi",
-      "Kalau nomor atau kata sandinya salah, kamu diberi tahu dan bisa mencoba lagi",
+      "Kalau nomor atau kata sandi salah, kamu diberi tahu dan bisa mencoba lagi",
+      "Akun yang belum punya kontak darurat langsung diarahkan untuk menambahkannya",
     ],
     visual: <LoginForm />,
   },
@@ -157,15 +162,18 @@ export default function FiturPage() {
   return (
     <>
       <PageIntro
-        title="Mendengar, mengingat, dan selalu berjaga."
-        lead="Setiap fitur LIVIA mengejar hal yang sama: kamu tidak dibiarkan sendirian, pada hari biasa maupun pada saat terberat."
+        title="Pendamping yang mendengar, mengingat, dan siaga."
+        lead="Semua fitur LIVIA dirancang untuk satu tujuan: memastikan kamu tidak sendirian, baik di hari biasa maupun di saat paling berat."
       />
 
-      <nav aria-label="Daftar fitur" className="bg-main-50">
-        <ul className="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 px-5 py-6 text-small">
+      <nav aria-label="Daftar fitur" className="mx-auto max-w-6xl px-5">
+        <ul className="flex flex-wrap gap-2">
           {features.map((f) => (
             <li key={f.id}>
-              <a href={`#${f.id}`} className="font-medium text-ink underline underline-offset-4 hover:no-underline">
+              <a
+                href={`#${f.id}`}
+                className="block rounded-full border border-line px-4 py-2 text-small hover:bg-paper-deep"
+              >
                 {f.title}
               </a>
             </li>
@@ -173,34 +181,49 @@ export default function FiturPage() {
         </ul>
       </nav>
 
-      {features.map((f) => (
-        <section key={f.id} id={f.id} className={`scroll-mt-20 ${f.emphasis ? "bg-alert-soft" : ""}`}>
-          <div
-            className={`mx-auto grid max-w-6xl items-start gap-10 px-5 py-16 md:grid-cols-[1.1fr_0.9fr] md:gap-16 md:py-20 ${
-              f.emphasis ? "" : "border-b border-line"
+      <div className="mx-auto mt-16 max-w-6xl space-y-6 px-5">
+        {features.map((f, i) => (
+          <section
+            key={f.id}
+            id={f.id}
+            className={`scroll-mt-28 grid items-center gap-10 rounded-3xl p-7 md:grid-cols-2 md:p-12 ${
+              f.emphasis ? "bg-alert-soft" : i % 2 === 0 ? "bg-paper-deep" : ""
             }`}
           >
-            <div className="min-w-0">
-              <h2 className={`text-heading md:text-title ${f.emphasis ? "text-alert-ink" : ""}`}>{f.title}</h2>
-              <p className="mt-4 max-w-xl text-ink-soft">{f.body}</p>
-              <ul className="mt-6 max-w-xl list-disc space-y-2.5 pl-5 text-ink-soft">
+            <div className={`min-w-0 ${i % 2 === 1 ? "md:order-2" : ""}`}>
+              <h2
+                className={`text-heading md:text-title ${
+                  f.emphasis ? "text-alert-ink" : ""
+                }`}
+              >
+                {f.title}
+              </h2>
+              <p className="mt-4 text-ink-soft">{f.body}</p>
+              <ul className="mt-6 space-y-2.5">
                 {f.points.map((p) => (
-                  <li key={p} className={f.emphasis ? "marker:text-alert" : "marker:text-main-500"}>
+                  <li key={p} className="flex gap-3 text-ink-soft">
+                    <span
+                      aria-hidden
+                      className={`mt-2 size-1.5 shrink-0 rounded-full ${f.emphasis ? "bg-alert" : "bg-ink"}`}
+                    />
                     {p}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="w-full min-w-0 max-w-sm md:ml-auto">{f.visual}</div>
-          </div>
-        </section>
-      ))}
+            <div className="mx-auto w-full min-w-0 max-w-sm">{f.visual}</div>
+          </section>
+        ))}
+      </div>
 
-      <section className="mx-auto max-w-6xl px-5 py-20">
+      <section className="mx-auto mt-20 max-w-6xl px-5">
         <p className="text-lead text-ink-soft">
-          Mau tahu langkah memakainya?{" "}
-          <Link href="/cara-kerja" className="font-semibold text-ink underline underline-offset-4">
-            Baca cara kerja LIVIA
+          Ingin tahu langkah-langkah memakainya?{" "}
+          <Link
+            href="/cara-kerja"
+            className="font-semibold text-ink underline underline-offset-4"
+          >
+            Lihat cara kerja LIVIA
           </Link>
         </p>
       </section>
