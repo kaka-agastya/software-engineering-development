@@ -226,6 +226,23 @@ export default function FiturPage() {
             Lihat cara kerja LIVIA
           </Link>
         </p>
+        <p className="mt-3 text-lead text-ink-soft">
+          Siap mencoba?{" "}
+          <Link
+            href="/daftar"
+            className="font-semibold text-ink underline underline-offset-4"
+          >
+            Daftar akun
+          </Link>{" "}
+          atau{" "}
+          <Link
+            href="/masuk"
+            className="font-semibold text-ink underline underline-offset-4"
+          >
+            masuk
+          </Link>
+          .
+        </p>
       </section>
     </>
   );

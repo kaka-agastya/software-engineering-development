@@ -4,6 +4,7 @@ export const navItems = [
   { href: "/cara-kerja", label: "Cara kerja" },
   { href: "/kontak-darurat", label: "Untuk kontak darurat" },
   { href: "/privasi", label: "Privasi & bantuan" },
+  { href: "/masuk", label: "Masuk" },
 ] as const;
 
 /**
