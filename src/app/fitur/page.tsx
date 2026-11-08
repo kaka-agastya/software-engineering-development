@@ -3,18 +3,19 @@ import Link from "next/link";
 import { ChatPreview } from "@/components/ChatPreview";
 import {
   AnalysisTags,
-  ContactCard,
   EmergencyCountdown,
   MoodPicker,
   SchedulePreview,
   SearchPreview,
   TrendChart,
 } from "@/components/FeatureVisuals";
+import { ContactManager, LoginForm, RegisterForm, SmsNotice } from "../_components/AccountVisuals";
 import { PageIntro } from "../_components/PageIntro";
 
 export const metadata: Metadata = {
   title: "Fitur",
-  description: "Teman bicara yang empatik, pembacaan emosi, check-in berkala, dan bantuan darurat di LIVIA.",
+  description:
+    "Teman bicara yang empatik, pembacaan emosi, check-in berkala, bantuan darurat, kontak darurat, dan akun yang aman di LIVIA.",
 };
 
 type Feature = {
@@ -68,14 +69,27 @@ const features: Feature[] = [
   },
   {
     id: "kontak",
-    title: "Kontak darurat yang kamu tentukan",
-    body: "Pilih minimal satu orang yang gampang dihubungi, bisa keluarga atau sahabat. Lewat SMS, mereka diberi tahu bahwa nomornya sudah didaftarkan.",
+    title: "Kelola kontak daruratmu",
+    body: "Pilih minimal satu orang yang gampang dihubungi, bisa keluarga atau sahabat. Daftarnya ada di Halaman Profil dan bisa kamu ubah kapan pun.",
     points: [
-      "Kontak bisa ditambah, diubah, atau dihapus kapan saja",
-      "Setiap perubahan data diberitahukan ke kontak tersebut",
-      "Kontakmu tidak perlu memasang aplikasi",
+      "Isi nama lengkap, nomor ponsel, dan hubunganmu dengan kontak tersebut",
+      "Nomor dicek formatnya, harus lengkap dengan kode negara seperti +62",
+      "Kontak bisa ditambah, diubah, atau dihapus, dan penghapusan selalu meminta konfirmasi",
+      "Data kontak tersimpan terenkripsi",
     ],
-    visual: <ContactCard />,
+    visual: <ContactManager />,
+  },
+  {
+    id: "sms",
+    title: "SMS pemberitahuan untuk kontak darurat",
+    body: "Begitu kontak disimpan atau diperbarui, LIVIA otomatis mengirim SMS supaya orang itu tahu dirinya terdaftar sebagai kontak daruratmu.",
+    points: [
+      "Terkirim ke setiap kontak segera setelah datanya disimpan",
+      "Kontakmu tidak perlu memasang aplikasi",
+      "Status pengiriman dicatat untuk setiap kontak",
+      "Kalau gagal, SMS dikirim ulang, dan kamu diberi tahu bila tetap tidak terkirim",
+    ],
+    visual: <SmsNotice />,
   },
   {
     id: "check-in",
@@ -114,6 +128,28 @@ const features: Feature[] = [
       "Semua data bisa dihapus kapan saja dengan menghapus akun",
     ],
     visual: <SearchPreview />,
+  },
+  {
+    id: "daftar",
+    title: "Daftar dengan nomor ponselmu",
+    body: "Buat akun dengan nama lengkap, nama panggilan, nomor ponsel, dan kata sandi. Nomormu diverifikasi lewat kode OTP yang dikirim melalui SMS.",
+    points: [
+      "Nomor ponsel ditulis lengkap dengan kode negara, misalnya +62 812…",
+      "Kode OTP yang salah atau kedaluwarsa bisa diminta ulang",
+      "Satu nomor hanya bisa dipakai untuk satu akun",
+      "Akun aktif penuh setelah kamu menyimpan minimal satu kontak darurat",
+    ],
+    visual: <RegisterForm />,
+  },
+  {
+    id: "masuk",
+    title: "Masuk ke akunmu",
+    body: "Sudah punya akun? Cukup masukkan nomor ponsel dan kata sandi, lalu kamu langsung kembali ke Halaman Home.",
+    points: [
+      "Kredensial disimpan dalam bentuk terenkripsi",
+      "Kalau nomor atau kata sandinya salah, kamu diberi tahu dan bisa mencoba lagi",
+    ],
+    visual: <LoginForm />,
   },
 ];
 
