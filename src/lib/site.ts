@@ -1,5 +1,6 @@
 export const navItems = [
   { href: "/", label: "Beranda" },
+  { href: "/chat", label: "Percakapan" },
   { href: "/fitur", label: "Fitur" },
   { href: "/cara-kerja", label: "Cara kerja" },
   { href: "/kontak-darurat", label: "Untuk kontak darurat" },
